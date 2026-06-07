@@ -1795,27 +1795,92 @@ document.querySelectorAll('.js-phone').forEach(function(input) {
   });
 });
 
+function showLeadError() {
+  alert('Не удалось отправить заявку. Позвоните нам: +7 (951) 099-05-55');
+}
+
+function sendLead(payload) {
+  payload.page = window.location.href;
+  payload.company = '';
+
+  return fetch('send.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(response) {
+    if (!response.ok) throw new Error('lead_send_failed');
+    return response.json();
+  }).then(function(result) {
+    if (!result || !result.ok) throw new Error('lead_send_failed');
+    return result;
+  });
+}
+
+function setButtonLoading(button, isLoading) {
+  if (!button) return;
+  if (isLoading) {
+    button.dataset.originalText = button.textContent;
+    button.textContent = 'Отправляем...';
+    button.disabled = true;
+  } else {
+    button.textContent = button.dataset.originalText || button.textContent;
+    button.disabled = false;
+  }
+}
+
 function submitForm(source) {
   if (source === 'modal') {
     var modalPhone = document.getElementById('modalPhone');
+    var modalSite = document.getElementById('modalSite');
+    var modalButton = document.querySelector('#modalForm .form-submit');
     if (!isValidPhone(modalPhone.value)) { markPhoneError(modalPhone); return; }
-    document.getElementById('modalForm').style.display = 'none';
-    document.getElementById('modalSuccess').style.display = 'block';
+    setButtonLoading(modalButton, true);
+    sendLead({
+      phone: modalPhone.value,
+      site: modalSite.value,
+      source: 'Модальная форма'
+    }).then(function() {
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('modalSuccess').style.display = 'block';
+    }).catch(showLeadError).finally(function() {
+      setButtonLoading(modalButton, false);
+    });
   } else {
     var offerPhone = document.getElementById('offerPhone');
+    var offerSite = document.getElementById('offerSite');
+    var offerButton = document.querySelector('#offerFormFields .form-submit');
     if (!isValidPhone(offerPhone.value)) { markPhoneError(offerPhone); return; }
-    document.getElementById('offerFormFields').style.display = 'none';
-    document.getElementById('offerSuccess').style.display = 'block';
+    setButtonLoading(offerButton, true);
+    sendLead({
+      phone: offerPhone.value,
+      site: offerSite.value,
+      source: 'Форма в блоке тестового запуска'
+    }).then(function() {
+      document.getElementById('offerFormFields').style.display = 'none';
+      document.getElementById('offerSuccess').style.display = 'block';
+    }).catch(showLeadError).finally(function() {
+      setButtonLoading(offerButton, false);
+    });
   }
 }
 
 function submitFinalForm() {
   var finalPhone = document.getElementById('finalPhone');
+  var finalButton = document.querySelector('.final-btn');
   if (!isValidPhone(finalPhone.value)) { markPhoneError(finalPhone); return; }
-  finalPhone.value = '';
-  finalPhone.placeholder = 'Заявка принята. Перезвоним в течение 5 минут';
-  finalPhone.style.color = '#22C55E';
-  finalPhone.classList.remove('error');
+  setButtonLoading(finalButton, true);
+  sendLead({
+    phone: finalPhone.value,
+    site: '',
+    source: 'Финальная форма'
+  }).then(function() {
+    finalPhone.value = '';
+    finalPhone.placeholder = 'Заявка принята. Перезвоним в течение 5 минут';
+    finalPhone.style.color = '#22C55E';
+    finalPhone.classList.remove('error');
+  }).catch(showLeadError).finally(function() {
+    setButtonLoading(finalButton, false);
+  });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
