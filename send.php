@@ -45,12 +45,6 @@ if (strlen($phoneDigits) < 10) {
     exit;
 }
 
-if ($site !== '' && !preg_match('~^(https?://)?[a-zа-яё0-9.-]+\.[a-zа-яё]{2,}(/.*)?$~iu', $site)) {
-    http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'bad_site']);
-    exit;
-}
-
 $to = 'info@allerhand.ru';
 $subject = 'Новая заявка с seodental.ru';
 $date = date('d.m.Y H:i:s');
