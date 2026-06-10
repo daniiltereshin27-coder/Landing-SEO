@@ -1164,7 +1164,7 @@ footer {
   .stat-card:last-child { border-bottom: none; }
   .pain-grid, .cases-grid, .cases-grid.case-feature-grid { grid-template-columns: 1fr; }
   .cases-grid.case-feature-grid { row-gap: 42px; }
-  .case-catalog { width: 100%; }
+  .case-catalog { width: 100%; margin-top: 18px; }
   .team-head { grid-template-columns: 1fr; gap: 14px; }
   .team-track { grid-auto-columns: minmax(220px, 44vw); height: 432px; padding-bottom: 34px; }
   .team-card { height: 386px; }
@@ -2227,7 +2227,7 @@ window.addEventListener('load', function() {
       });
     });
 
-    var revealItems = document.querySelectorAll('section:not(.hero), .logos-section, .stats-section, .case-card, .team-card');
+    var revealItems = document.querySelectorAll('section:not(.hero), .logos-section, .stats-section, .case-card, .case-catalog, .team-card');
     revealItems.forEach(function(el) {
       setRevealStart(el, 36);
     });
@@ -2235,8 +2235,8 @@ window.addEventListener('load', function() {
     var revealObserver = new IntersectionObserver(function(entries, observer) {
       entries.forEach(function(entry) {
         if (!entry.isIntersecting) return;
-        var delay = entry.target.classList.contains('case-card') || entry.target.classList.contains('team-card')
-          ? Array.prototype.indexOf.call(document.querySelectorAll('.case-card, .team-card'), entry.target) * 120
+        var delay = entry.target.classList.contains('team-card')
+          ? Array.prototype.indexOf.call(document.querySelectorAll('.team-card'), entry.target) * 120
           : 0;
         revealElement(entry.target, delay);
         if (entry.target.classList.contains('stats-section')) animateStats();
@@ -2345,12 +2345,11 @@ window.addEventListener('load', function() {
   }, 350);
   window.setTimeout(function() { window.clearInterval(statsPoll); }, 12000);
 
-  gsap.from('.case-card', {
+  gsap.from('.cases-grid.case-feature-grid > *', {
     y: 42,
     opacity: 0,
     duration: 0.75,
     ease: 'power3.out',
-    stagger: 0.16,
     scrollTrigger: {
       trigger: '.cases-grid',
       start: 'top 82%',
@@ -2371,7 +2370,7 @@ window.addEventListener('load', function() {
     }
   });
 
-  initVisibilitySafety('section:not(.hero), .logos-section, .case-card, .team-card');
+  initVisibilitySafety('section:not(.hero), .logos-section, .case-card, .case-catalog, .team-card');
 
 });
 </script>
