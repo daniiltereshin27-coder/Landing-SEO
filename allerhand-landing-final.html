@@ -88,6 +88,8 @@ body {
   border-radius: 50%;
   transition: transform .16s ease-out, opacity .2s ease, border-color .2s ease;
 }
+.cursor,
+.cursor-ring { display: none !important; }
 body.cursor-ready .cursor,
 body.cursor-ready .cursor-ring { opacity: 1; }
 body.cursor-hover .cursor { transform: scale(2); background: var(--primary); }
@@ -660,7 +662,10 @@ section[id] { scroll-margin-top: 86px; }
 .cases-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
-.cases-grid.case-feature-grid { grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr); }
+.cases-grid.case-feature-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  align-items: start;
+}
 .case-card {
   border-radius: var(--r-lg); border: 1px solid #E2E8F0;
   overflow: hidden; transition: transform .25s, box-shadow .25s;
@@ -743,7 +748,7 @@ section[id] { scroll-margin-top: 86px; }
   border: 1px solid var(--border-med);
   border-radius: var(--r-lg);
   padding: 30px;
-  align-self: stretch;
+  align-self: start;
 }
 .case-catalog-title {
   font-family: 'Figtree', sans-serif;
@@ -1079,7 +1084,8 @@ footer {
   .stat-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .stat-card:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
   .stat-card:last-child { border-bottom: none; }
-  .pain-grid, .cases-grid { grid-template-columns: 1fr; }
+  .pain-grid, .cases-grid, .cases-grid.case-feature-grid { grid-template-columns: 1fr; }
+  .case-catalog { width: 100%; }
   .team-head { grid-template-columns: 1fr; gap: 14px; }
   .team-track { grid-auto-columns: minmax(220px, 44vw); height: 432px; padding-bottom: 34px; }
   .team-card { height: 386px; }
@@ -1105,6 +1111,11 @@ footer {
   .final-input { min-width: 100%; }
   .offer-box { padding: 24px; }
   .test-scope { grid-template-columns: 1fr; }
+  .case-header { flex-direction: column; gap: 12px; }
+  .case-result-badge { align-self: flex-start; }
+  .case-body, .case-catalog { padding: 24px; }
+  .case-metric { font-size: 28px; line-height: 1.08; }
+  .case-economics { grid-template-columns: 1fr; }
   .case-proof { grid-template-columns: 1fr; }
   .section-title { letter-spacing: -0.5px; }
 }
