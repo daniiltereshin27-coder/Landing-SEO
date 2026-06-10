@@ -743,6 +743,51 @@ section[id] { scroll-margin-top: 86px; }
   margin-top: 3px;
   font-size: 11px; line-height: 1.35; color: var(--text-muted);
 }
+.case-topvisor-proof {
+  margin-top: 18px;
+  padding: 14px;
+  background: #F8FAFC;
+  border: 1px solid var(--border-med);
+  border-radius: 14px;
+}
+.case-topvisor-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  margin-bottom: 12px;
+}
+.case-topvisor-title {
+  display: block;
+  font-family: 'Figtree', sans-serif;
+  font-size: 12px; font-weight: 900; color: var(--text);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.case-topvisor-text {
+  margin-top: 4px;
+  font-size: 12px; line-height: 1.45; color: var(--text-muted);
+}
+.case-topvisor-badge {
+  flex-shrink: 0;
+  font-size: 11px; font-weight: 800; color: var(--primary-dark);
+  background: var(--primary-bg);
+  border: 1px solid var(--border-med);
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+.case-topvisor-shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid #D7EAF0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  cursor: zoom-in;
+  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+}
+.case-topvisor-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .case-catalog {
   background: var(--bg);
   border: 1px solid var(--border-med);
@@ -1068,6 +1113,39 @@ footer {
 }
 .modal-success h3 { font-family: 'Figtree', sans-serif; font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
 .modal-success p { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+.proof-modal-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgba(15,23,42,0.78);
+  backdrop-filter: blur(8px);
+}
+.proof-modal-overlay.active { display: flex; }
+.proof-modal {
+  position: relative;
+  width: min(1180px, 100%);
+  max-height: calc(100vh - 48px);
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+}
+.proof-modal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100vh - 48px);
+  object-fit: contain;
+}
+.proof-modal-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 42px; height: 42px;
+  border: none; border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.18);
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
@@ -1119,6 +1197,10 @@ footer {
   .case-economics { grid-template-columns: 1fr; }
   .case-query { max-width: 100%; overflow-wrap: anywhere; }
   .case-proof { grid-template-columns: 1fr; }
+  .case-topvisor-head { flex-direction: column; gap: 8px; }
+  .case-topvisor-badge { align-self: flex-start; }
+  .proof-modal-overlay { padding: 12px; }
+  .proof-modal { border-radius: 14px; }
   .section-title { letter-spacing: -0.5px; }
 }
 
@@ -1511,6 +1593,18 @@ footer {
             <div><span>Срез</span><small>позиции проверены 01.06.2026</small></div>
             <div><span>Период</span><small>заявки считались за первый месяц</small></div>
           </div>
+          <div class="case-topvisor-proof">
+            <div class="case-topvisor-head">
+              <div>
+                <span class="case-topvisor-title">Скриншот из Topvisor</span>
+                <p class="case-topvisor-text">Полный скриншот: видно запросы, даты проверки и рост позиций до ТОП-1.</p>
+              </div>
+              <span class="case-topvisor-badge">Независимый источник</span>
+            </div>
+            <button class="case-topvisor-shot" type="button" onclick="openProofModal()" aria-label="Открыть скриншот Topvisor крупно">
+              <img src="img/cases/profident-topvisor.png" alt="Скриншот Topvisor по проекту Профидент73 с позициями запросов">
+            </button>
+          </div>
         </div>
       </div>
       <div class="case-catalog">
@@ -1791,6 +1885,15 @@ footer {
   </div>
 </div>
 
+<div class="proof-modal-overlay" id="proofModal" role="dialog" aria-modal="true" aria-label="Скриншот Topvisor">
+  <div class="proof-modal">
+    <button class="proof-modal-close" onclick="closeProofModal()" aria-label="Закрыть скриншот">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img src="img/cases/profident-topvisor.png" alt="Скриншот Topvisor по проекту Профидент73 с позициями запросов">
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script>
@@ -1840,8 +1943,22 @@ function closeModal() {
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
+function openProofModal() {
+  document.getElementById('proofModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeProofModal() {
+  document.getElementById('proofModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('proofModal').addEventListener('click', function(e) {
+  if (e.target === this) closeProofModal();
+});
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') {
+    closeModal();
+    closeProofModal();
+  }
 });
 
 function normalizePhoneDigits(value) {
