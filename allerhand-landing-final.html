@@ -660,11 +660,13 @@ section[id] { scroll-margin-top: 86px; }
 .cases-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
+.cases-grid.case-feature-grid { grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr); }
 .case-card {
   border-radius: var(--r-lg); border: 1px solid #E2E8F0;
   overflow: hidden; transition: transform .25s, box-shadow .25s;
   cursor: default;
 }
+.case-card.featured-case { box-shadow: var(--sh-lg); }
 .case-card:hover { transform: translateY(-4px); box-shadow: var(--sh-xl); }
 .case-header {
   background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary) 100%);
@@ -672,6 +674,8 @@ section[id] { scroll-margin-top: 86px; }
   display: flex; align-items: flex-start; justify-content: space-between;
 }
 .case-client { font-family: 'Figtree', sans-serif; font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+.case-client a { color: inherit; text-decoration: none; }
+.case-client a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .case-city { font-size: 13px; color: rgba(255,255,255,0.7); }
 .case-result-badge {
   background: var(--cta); color: #fff;
@@ -694,6 +698,31 @@ section[id] { scroll-margin-top: 86px; }
   background: #F8FAFC; color: var(--text-muted);
   padding: 4px 10px; border-radius: 5px; border: 1px solid #E2E8F0;
 }
+.case-query.strong {
+  color: var(--primary-dark);
+  background: var(--primary-bg);
+  border-color: var(--border-med);
+}
+.case-economics {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin: 20px 0 18px;
+}
+.case-economics-item {
+  background: var(--bg);
+  border: 1px solid var(--border-med);
+  border-radius: 10px;
+  padding: 14px;
+}
+.case-economics-value {
+  display: block;
+  font-family: 'Figtree', sans-serif;
+  font-size: 23px; font-weight: 900; color: var(--text);
+  line-height: 1; margin-bottom: 6px;
+}
+.case-economics-label {
+  display: block;
+  font-size: 11px; line-height: 1.35; color: var(--text-muted);
+}
 .case-proof {
   margin-top: 18px; padding-top: 16px;
   border-top: 1px solid #E2E8F0;
@@ -708,6 +737,35 @@ section[id] { scroll-margin-top: 86px; }
   display: block;
   margin-top: 3px;
   font-size: 11px; line-height: 1.35; color: var(--text-muted);
+}
+.case-catalog {
+  background: var(--bg);
+  border: 1px solid var(--border-med);
+  border-radius: var(--r-lg);
+  padding: 30px;
+  align-self: stretch;
+}
+.case-catalog-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: 24px; font-weight: 900; line-height: 1.12;
+  color: var(--text); margin-bottom: 12px; letter-spacing: -0.4px;
+}
+.case-catalog-text {
+  font-size: 14px; line-height: 1.7; color: var(--text-soft);
+  margin-bottom: 18px;
+}
+.case-catalog-list {
+  list-style: none; margin-bottom: 22px;
+}
+.case-catalog-list li {
+  display: flex; gap: 9px; align-items: flex-start;
+  font-size: 13px; line-height: 1.55; color: var(--text-soft);
+  margin-bottom: 9px;
+}
+.case-catalog-list li::before {
+  content: '';
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--cta); flex-shrink: 0; margin-top: 7px;
 }
 
 /* ── TEAM ── */
@@ -1400,55 +1458,62 @@ footer {
   <div class="section-inner">
     <p class="section-eyebrow">Кейсы</p>
     <h2 class="section-title">Реальные результаты<br><em>стоматологий</em></h2>
-    <p class="section-sub">Показываем запросы, частотность, стартовые позиции и результат в Topvisor. Это можно проверить по датам и региону.</p>
-    <div class="cases-grid">
-      <div class="case-card">
+    <p class="section-sub">Показываем не только позиции, но и экономику: сколько заявок пришло из органического поиска, сколько стоило обращение и какая доля дошла до записи.</p>
+    <div class="cases-grid case-feature-grid">
+      <div class="case-card featured-case">
         <div class="case-header">
           <div>
-            <div class="case-client">ЛюмиДент</div>
-            <div class="case-city">Москва · сеть стоматологий</div>
+            <div class="case-client"><a href="https://profident73.ru/" target="_blank" rel="noopener">Профидент73</a></div>
+            <div class="case-city">Ульяновск · стоматологическая клиника</div>
           </div>
-          <span class="case-result-badge">за 2 дня</span>
+          <span class="case-result-badge">1 месяц</span>
         </div>
         <div class="case-body">
-          <div class="case-metric"><em>5 000+</em> запросов в ТОП-1</div>
-          <p class="case-desc">Сайт стартовал по многим коммерческим запросам с позиций 40–80. После продвижения занял первые места по высокочастотным стоматологическим запросам Москвы.</p>
+          <div class="case-metric"><em>155 заявок</em> с SEO за первый месяц</div>
+          <p class="case-desc">Сайт profident73.ru вывели в ТОП по коммерческим запросам в Яндексе по региону Ульяновск. На срезе Topvisor от 01.06.2026 большинство запросов по услуге находились в ТОП-1.</p>
+          <div class="case-economics">
+            <div class="case-economics-item">
+              <span class="case-economics-value">155</span>
+              <span class="case-economics-label">заявок из органического поиска</span>
+            </div>
+            <div class="case-economics-item">
+              <span class="case-economics-value">507 ₽</span>
+              <span class="case-economics-label">стоимость заявки с SEO</span>
+            </div>
+            <div class="case-economics-item">
+              <span class="case-economics-value">31%</span>
+              <span class="case-economics-label">конверсия в запись на приём</span>
+            </div>
+          </div>
           <div class="case-queries">
-            <span class="case-query">удаление зуба — 93 647/мес</span>
-            <span class="case-query">стоматология Москва — 73 725/мес</span>
-            <span class="case-query">имплантация зубов — 32 790/мес</span>
-            <span class="case-query">чистка зубов — 41 886/мес</span>
+            <span class="case-query strong">лечение кариеса — ТОП-1</span>
+            <span class="case-query strong">имплантация зубов — ТОП-1</span>
+            <span class="case-query strong">протезирование зубов — ТОП-1</span>
+            <span class="case-query strong">удаление зубов — ТОП-1</span>
+            <span class="case-query strong">зубные протезы в ульяновске цены — ТОП-1</span>
+            <span class="case-query">более 588 запросов в продвижении</span>
           </div>
           <div class="case-proof">
-            <div><span>Источник</span><small>Topvisor, регион Москва</small></div>
-            <div><span>Контроль</span><small>позиции и частотность запросов</small></div>
-            <div><span>Срок</span><small>первые ТОП-позиции за 2 дня</small></div>
+            <div><span>Источник</span><small>Topvisor, Яндекс, регион Ульяновск</small></div>
+            <div><span>Срез</span><small>позиции проверены 01.06.2026</small></div>
+            <div><span>Период</span><small>заявки считались за первый месяц</small></div>
           </div>
         </div>
       </div>
-      <div class="case-card">
-        <div class="case-header">
-          <div>
-            <div class="case-client">Здоровых 32</div>
-            <div class="case-city">Ульяновск · стоматология</div>
-          </div>
-          <span class="case-result-badge">доминирование</span>
+      <div class="case-catalog">
+        <h3 class="case-catalog-title">Получить PDF с кейсами стоматологий</h3>
+        <p class="case-catalog-text">Вышлем подборку с примерами продвижения: запросы, регионы, данные Topvisor, заявки с SEO и стоимость обращения там, где клиент разрешил раскрывать цифры.</p>
+        <ul class="case-catalog-list">
+          <li>свежий кейс с заявками и стоимостью обращения;</li>
+          <li>архивные результаты Topvisor за период активного продвижения;</li>
+          <li>дополнительные примеры по стоматологиям с закрытыми коммерческими данными.</li>
+        </ul>
+        <div class="form-group">
+          <label class="form-label" for="casesPhone">Ваш телефон</label>
+          <input type="tel" class="form-input js-phone" placeholder="+7 (___) ___-__-__" id="casesPhone" inputmode="tel" autocomplete="tel">
         </div>
-        <div class="case-body">
-          <div class="case-metric"><em>60%</em> всего трафика региона</div>
-          <p class="case-desc">Сайт занял лидирующие позиции по основным запросам стоматологической тематики в Ульяновске. По данным проекта клиент получил заметную долю регионального органического трафика.</p>
-          <div class="case-queries">
-            <span class="case-query">стоматология — поз. 16→1</span>
-            <span class="case-query">стоматология Ульяновск — 13→1</span>
-            <span class="case-query">протезирование зубов — ТОП-3</span>
-            <span class="case-query">удаление зубов — ТОП-2</span>
-          </div>
-          <div class="case-proof">
-            <div><span>Источник</span><small>Topvisor, регион Ульяновск</small></div>
-            <div><span>Контроль</span><small>позиции по услугам и геозапросам</small></div>
-            <div><span>Итог</span><small>до 60% трафика региона</small></div>
-          </div>
-        </div>
+        <button class="form-submit" onclick="submitCasesForm()">Получить подборку кейсов →</button>
+        <p class="form-note">Перезвоним в течение 5 минут и отправим подборку удобным способом</p>
       </div>
     </div>
   </div>
@@ -1898,6 +1963,25 @@ function submitFinalForm() {
     finalPhone.classList.remove('error');
   }).catch(showLeadError).finally(function() {
     setButtonLoading(finalButton, false);
+  });
+}
+
+function submitCasesForm() {
+  var casesPhone = document.getElementById('casesPhone');
+  var casesButton = document.querySelector('.case-catalog .form-submit');
+  if (!isValidPhone(casesPhone.value)) { markPhoneError(casesPhone); return; }
+  setButtonLoading(casesButton, true);
+  sendLead({
+    phone: casesPhone.value,
+    site: '',
+    source: 'Форма PDF с кейсами'
+  }).then(function() {
+    casesPhone.value = '';
+    casesPhone.placeholder = 'Заявка принята. Подборку отправим после звонка';
+    casesPhone.style.color = '#22C55E';
+    casesPhone.classList.remove('error');
+  }).catch(showLeadError).finally(function() {
+    setButtonLoading(casesButton, false);
   });
 }
 
