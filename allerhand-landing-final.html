@@ -2379,6 +2379,12 @@ function sendLead(payload) {
   });
 }
 
+function reachTestGoal() {
+  if (typeof ym === 'function') {
+    ym(109741803, 'reachGoal', 'test');
+  }
+}
+
 function setButtonLoading(button, isLoading) {
   if (!button) return;
   if (isLoading) {
@@ -2403,6 +2409,7 @@ function submitForm(source) {
       site: modalSite.value,
       source: 'Модальная форма'
     }).then(function() {
+      reachTestGoal();
       document.getElementById('modalForm').style.display = 'none';
       document.getElementById('modalSuccess').style.display = 'block';
     }).catch(showLeadError).finally(function() {
@@ -2419,6 +2426,7 @@ function submitForm(source) {
       site: offerSite.value,
       source: 'Форма в блоке тестового запуска'
     }).then(function() {
+      reachTestGoal();
       document.getElementById('offerFormFields').style.display = 'none';
       document.getElementById('offerSuccess').style.display = 'block';
     }).catch(showLeadError).finally(function() {
@@ -2437,6 +2445,7 @@ function submitFinalForm() {
     site: '',
     source: 'Финальная форма'
   }).then(function() {
+    reachTestGoal();
     finalPhone.value = '';
     finalPhone.placeholder = 'Заявка принята. Перезвоним в течение 5 минут';
     finalPhone.style.color = '#22C55E';
