@@ -145,6 +145,74 @@ nav {
   text-decoration: none; display: inline-block;
 }
 .nav-cta:hover { background: var(--cta-dark); transform: translateY(-1px); }
+.nav-burger {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-med);
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+.nav-burger:hover { border-color: var(--border-strong); background: var(--primary-bg); }
+.nav-burger:active { transform: scale(0.96); }
+.nav-burger span,
+.nav-burger::before,
+.nav-burger::after {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform .22s ease, opacity .18s ease;
+}
+.nav-burger span { margin: 5px 0; }
+.nav-burger[aria-expanded="true"]::before { transform: translateY(7px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span { opacity: 0; }
+.nav-burger[aria-expanded="true"]::after { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 76px;
+  left: 16px;
+  right: 16px;
+  z-index: 99;
+  padding: 14px;
+  background: rgba(255,255,255,0.98);
+  border: 1px solid var(--border-med);
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(15,23,42,0.14);
+  backdrop-filter: blur(14px);
+}
+.mobile-menu.active { display: block; }
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+}
+.mobile-menu a:hover { background: var(--primary-bg); color: var(--primary-dark); }
+.mobile-menu-cta {
+  margin-top: 8px;
+  justify-content: center;
+  background: var(--cta);
+  color: #fff !important;
+}
+.mobile-menu-cta:hover { background: var(--cta-dark) !important; color: #fff !important; }
+@media (min-width: 901px) {
+  .mobile-menu.active { display: none; }
+}
 
 /* ── HERO ── */
 .hero {
@@ -795,6 +863,7 @@ section[id] { scroll-margin-top: 86px; }
   padding: 30px;
   align-self: start;
 }
+.case-catalog-mobile { display: none; }
 .case-catalog-title {
   font-family: 'Figtree', sans-serif;
   font-size: 24px; font-weight: 900; line-height: 1.12;
@@ -816,6 +885,89 @@ section[id] { scroll-margin-top: 86px; }
   content: '';
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--cta); flex-shrink: 0; margin-top: 7px;
+}
+.cases-more {
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid #E2E8F0;
+}
+.cases-more-head {
+  display: flex; align-items: end; justify-content: space-between; gap: 24px;
+  margin-bottom: 18px;
+}
+.cases-more-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: 22px; font-weight: 900; line-height: 1.15;
+  color: var(--text); letter-spacing: -0.3px;
+}
+.cases-more-note {
+  max-width: 520px;
+  font-size: 13px; line-height: 1.6; color: var(--text-muted);
+}
+.extra-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+.extra-case-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border-med);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+}
+.extra-case-content {
+  min-height: 390px;
+}
+.extra-case-kicker {
+  display: inline-flex;
+  margin-bottom: 10px;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--primary);
+}
+.extra-case-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: 22px; font-weight: 900; color: var(--text);
+  margin-bottom: 5px;
+}
+.extra-case-meta {
+  font-size: 13px; color: var(--text-muted); margin-bottom: 14px;
+}
+.extra-case-stats {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
+  margin-bottom: 14px;
+}
+.extra-case-stat {
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 11px 12px;
+}
+.extra-case-stat strong {
+  display: block;
+  font-family: 'Figtree', sans-serif;
+  font-size: 18px; line-height: 1; color: var(--text);
+  margin-bottom: 4px;
+}
+.extra-case-stat span {
+  display: block;
+  font-size: 11px; line-height: 1.35; color: var(--text-muted);
+}
+.extra-case-queries {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.extra-case-shot {
+  min-height: 190px;
+  height: 220px;
+  margin-top: auto;
+}
+.extra-case-shot img {
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
 }
 
 /* ── TEAM ── */
@@ -1149,9 +1301,12 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 0 20px; }
+  nav { padding: 0 20px; gap: 12px; }
   .nav-menu { display: none; }
   .nav-cta { display: none; }
+  .nav-logo { flex: 1 1 auto; }
+  .nav-phone { margin: 0; font-size: 15px; }
+  .nav-burger { display: inline-flex; flex: 0 0 42px; flex-direction: column; }
   .hero { padding: 100px 20px 60px; }
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero-card { display: none; }
@@ -1165,6 +1320,8 @@ footer {
   .pain-grid, .cases-grid, .cases-grid.case-feature-grid { grid-template-columns: 1fr; }
   .cases-grid.case-feature-grid { row-gap: 42px; }
   .case-catalog { width: 100%; margin-top: 18px; }
+  .cases-grid .case-catalog { display: none; }
+  .case-catalog-mobile { display: block; margin-top: 34px; }
   .team-head { grid-template-columns: 1fr; gap: 14px; }
   .team-track { grid-auto-columns: minmax(220px, 44vw); height: 432px; padding-bottom: 34px; }
   .team-card { height: 386px; }
@@ -1180,6 +1337,11 @@ footer {
   .footer-links { justify-content: center; flex-wrap: wrap; gap: 12px; }
 }
 @media (max-width: 600px) {
+  nav { padding: 0 16px; height: 64px; gap: 10px; }
+  .nav-logo { font-size: 19px; }
+  .nav-phone { font-size: 15px; }
+  .nav-burger { width: 40px; height: 40px; flex-basis: 40px; }
+  .mobile-menu { top: 72px; left: 12px; right: 12px; }
   .stats-inner { grid-template-columns: 1fr 1fr; }
   .stat-num { font-size: 34px; }
   .why-grid { grid-template-columns: 1fr; }
@@ -1199,9 +1361,22 @@ footer {
   .case-proof { grid-template-columns: 1fr; }
   .case-topvisor-head { flex-direction: column; gap: 8px; }
   .case-topvisor-badge { align-self: flex-start; }
+  .cases-more-head { display: block; }
+  .cases-more-note { margin-top: 8px; }
+  .extra-case-card { padding: 18px; }
+  .extra-case-content { min-height: 0; }
+  .extra-case-stats { grid-template-columns: 1fr; }
+  .extra-case-shot { min-height: 0; }
+  .extra-case-shot img { height: auto; object-fit: contain; }
   .proof-modal-overlay { padding: 12px; }
   .proof-modal { border-radius: 14px; }
   .section-title { letter-spacing: -0.5px; }
+}
+@media (max-width: 380px) {
+  nav { padding: 0 12px; gap: 8px; }
+  .nav-logo { font-size: 18px; letter-spacing: -0.7px; }
+  .nav-phone { font-size: 13px; }
+  .nav-burger { width: 38px; height: 38px; flex-basis: 38px; border-radius: 9px; }
 }
 
 /* ── A11Y ── */
@@ -1231,7 +1406,17 @@ footer {
   </div>
   <a href="tel:+79950994557" class="nav-phone">+7 (995) 099-45-57</a>
   <a href="#offer" class="nav-cta" onclick="openModal(event)">Получить тест без предоплаты</a>
+  <button class="nav-burger" type="button" aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false" id="navBurger">
+    <span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu" aria-label="Мобильная навигация">
+  <a href="#how">Как мы работаем</a>
+  <a href="#team">Команда</a>
+  <a href="#cases">Кейсы</a>
+  <a href="#faq">FAQ</a>
+  <a href="#offer" class="mobile-menu-cta">Получить тест без предоплаты</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1601,7 +1786,7 @@ footer {
               </div>
               <span class="case-topvisor-badge">Независимый источник</span>
             </div>
-            <button class="case-topvisor-shot" type="button" onclick="openProofModal()" aria-label="Открыть скриншот Topvisor крупно">
+            <button class="case-topvisor-shot" type="button" onclick="openProofModal('img/cases/profident-topvisor.png', 'Скриншот Topvisor по проекту Профидент73 с позициями запросов')" aria-label="Открыть скриншот Topvisor крупно">
               <img src="img/cases/profident-topvisor.png" alt="Скриншот Topvisor по проекту Профидент73 с позициями запросов">
             </button>
           </div>
@@ -1622,6 +1807,137 @@ footer {
         <button class="form-submit" onclick="submitCasesForm()">Получить подборку кейсов →</button>
         <p class="form-note">Перезвоним в течение 5 минут и отправим подборку удобным способом</p>
       </div>
+    </div>
+    <div class="cases-more">
+      <div class="cases-more-head">
+        <h3 class="cases-more-title">Еще результаты<br>наших клиентов</h3>
+        <p class="cases-more-note">Посмотрите, как менялись позиции по коммерческим запросам. Каждый запрос в ТОПе это ваши потенциальные пациенты.</p>
+      </div>
+      <div class="extra-cases-grid">
+        <div class="extra-case-card">
+          <div class="extra-case-content">
+            <span class="extra-case-kicker">Стоматология</span>
+            <h4 class="extra-case-title">Люмидент</h4>
+            <p class="extra-case-meta">Москва · Яндекс · срез Topvisor 01.11.2025</p>
+            <div class="extra-case-stats">
+              <div class="extra-case-stat">
+                <strong>5069</strong>
+                <span>запросов в проекте</span>
+              </div>
+              <div class="extra-case-stat">
+                <strong>ТОП-1</strong>
+                <span>по ключевым услугам</span>
+              </div>
+            </div>
+            <div class="extra-case-queries">
+              <span class="case-query strong">лечение кариеса — ТОП-1</span>
+              <span class="case-query strong">детский стоматолог — ТОП-1</span>
+              <span class="case-query strong">протезирование зубов — ТОП-1</span>
+              <span class="case-query strong">имплантация зубов — ТОП-1</span>
+              <span class="case-query strong">отбеливание зубов — ТОП-1</span>
+            </div>
+          </div>
+          <button class="case-topvisor-shot extra-case-shot" type="button" onclick="openProofModal('img/cases/lumident-topvisor.png', 'Скриншот Topvisor по проекту Люмидент с позициями запросов')" aria-label="Открыть скриншот Topvisor по Люмидент крупно">
+            <img src="img/cases/lumident-topvisor.png" alt="Скриншот Topvisor по проекту Люмидент с позициями запросов">
+          </button>
+        </div>
+        <div class="extra-case-card">
+          <div class="extra-case-content">
+            <span class="extra-case-kicker">Стоматология</span>
+            <h4 class="extra-case-title">zdorovih32</h4>
+            <p class="extra-case-meta">Ульяновск · Яндекс · срез Topvisor 02.12.2024</p>
+            <div class="extra-case-stats">
+              <div class="extra-case-stat">
+                <strong>324</strong>
+                <span>запроса в проекте</span>
+              </div>
+              <div class="extra-case-stat">
+                <strong>ТОП-5</strong>
+                <span>по основным запросам</span>
+              </div>
+            </div>
+            <div class="extra-case-queries">
+              <span class="case-query strong">стоматология — ТОП-1</span>
+              <span class="case-query strong">частная стоматология — ТОП-1</span>
+              <span class="case-query strong">протезирование зубов в ульяновске — ТОП-1</span>
+              <span class="case-query strong">стоматология ульяновск — ТОП-3</span>
+              <span class="case-query strong">стоматология цены — ТОП-4</span>
+            </div>
+          </div>
+          <button class="case-topvisor-shot extra-case-shot" type="button" onclick="openProofModal('img/cases/zdorovih32-topvisor.png', 'Скриншот Topvisor по проекту zdorovih32 с позициями запросов')" aria-label="Открыть скриншот Topvisor по zdorovih32 крупно">
+            <img src="img/cases/zdorovih32-topvisor.png" alt="Скриншот Topvisor по проекту zdorovih32 с позициями запросов">
+          </button>
+        </div>
+        <div class="extra-case-card">
+          <div class="extra-case-content">
+            <span class="extra-case-kicker">Смежная медицинская тематика</span>
+            <h4 class="extra-case-title">Dr. Gauer</h4>
+            <p class="extra-case-meta">Москва · Яндекс · срез Topvisor 24.03.2025</p>
+            <div class="extra-case-stats">
+              <div class="extra-case-stat">
+                <strong>216</strong>
+                <span>запросов в проекте</span>
+              </div>
+              <div class="extra-case-stat">
+                <strong>+150%</strong>
+                <span>рост органического трафика</span>
+              </div>
+            </div>
+            <div class="extra-case-queries">
+              <span class="case-query strong">пластика губ стоимость — ТОП-1</span>
+              <span class="case-query strong">хейлопластика москва — ТОП-1</span>
+              <span class="case-query strong">пластика рубцов — ТОП-1</span>
+              <span class="case-query strong">липофилинг носогубных складок — ТОП-1</span>
+              <span class="case-query strong">лифтинг средней зоны лица — ТОП-1</span>
+            </div>
+          </div>
+          <button class="case-topvisor-shot extra-case-shot" type="button" onclick="openProofModal('img/cases/dr-gauer-topvisor.jpg', 'Скриншот Topvisor по проекту Dr. Gauer с позициями запросов')" aria-label="Открыть скриншот Topvisor по Dr. Gauer крупно">
+            <img src="img/cases/dr-gauer-topvisor.jpg" alt="Скриншот Topvisor по проекту Dr. Gauer с позициями запросов">
+          </button>
+        </div>
+        <div class="extra-case-card">
+          <div class="extra-case-content">
+            <span class="extra-case-kicker">Смежная медицинская тематика</span>
+            <h4 class="extra-case-title">Shihirman</h4>
+            <p class="extra-case-meta">Москва · Яндекс · срез Topvisor 16.07.2024</p>
+            <div class="extra-case-stats">
+              <div class="extra-case-stat">
+                <strong>107</strong>
+                <span>запросов в проекте</span>
+              </div>
+              <div class="extra-case-stat">
+                <strong>ТОП-10</strong>
+                <span>по основным запросам</span>
+              </div>
+            </div>
+            <div class="extra-case-queries">
+              <span class="case-query strong">ринопластика носа — ТОП-1</span>
+              <span class="case-query strong">клиника ринопластики — ТОП-1</span>
+              <span class="case-query strong">пластика носа — ТОП-2</span>
+              <span class="case-query strong">ринопластика — ТОП-5</span>
+              <span class="case-query strong">операция на нос — ТОП-6</span>
+            </div>
+          </div>
+          <button class="case-topvisor-shot extra-case-shot" type="button" onclick="openProofModal('img/cases/shihirman-topvisor.jpg', 'Скриншот Topvisor по проекту Shihirman с позициями запросов')" aria-label="Открыть скриншот Topvisor по Shihirman крупно">
+            <img src="img/cases/shihirman-topvisor.jpg" alt="Скриншот Topvisor по проекту Shihirman с позициями запросов">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="case-catalog case-catalog-mobile">
+      <h3 class="case-catalog-title">Получить PDF с кейсами стоматологий</h3>
+      <p class="case-catalog-text">Вышлем подборку с примерами продвижения: запросы, регионы, данные Topvisor, заявки с SEO и стоимость обращения там, где клиент разрешил раскрывать цифры.</p>
+      <ul class="case-catalog-list">
+        <li>свежий кейс с заявками и стоимостью обращения;</li>
+        <li>архивные результаты Topvisor за период активного продвижения;</li>
+        <li>дополнительные примеры по стоматологиям с закрытыми коммерческими данными.</li>
+      </ul>
+      <div class="form-group">
+        <label class="form-label" for="casesPhoneMobile">Ваш телефон</label>
+        <input type="tel" class="form-input js-phone" placeholder="+7 (___) ___-__-__" id="casesPhoneMobile" inputmode="tel" autocomplete="tel">
+      </div>
+      <button class="form-submit" onclick="submitCasesForm('casesPhoneMobile')">Получить подборку кейсов →</button>
+      <p class="form-note">Перезвоним в течение 5 минут и отправим подборку удобным способом</p>
     </div>
   </div>
 </section>
@@ -1890,7 +2206,7 @@ footer {
     <button class="proof-modal-close" onclick="closeProofModal()" aria-label="Закрыть скриншот">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <img src="img/cases/profident-topvisor.png" alt="Скриншот Topvisor по проекту Профидент73 с позициями запросов">
+    <img id="proofModalImage" src="img/cases/profident-topvisor.png" alt="Скриншот Topvisor по проекту Профидент73 с позициями запросов">
   </div>
 </div>
 
@@ -1943,7 +2259,12 @@ function closeModal() {
 document.getElementById('modal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
-function openProofModal() {
+function openProofModal(src, alt) {
+  var proofImage = document.getElementById('proofModalImage');
+  if (proofImage && src) {
+    proofImage.src = src;
+    proofImage.alt = alt || 'Скриншот Topvisor';
+  }
   document.getElementById('proofModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1958,6 +2279,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeModal();
     closeProofModal();
+    closeMobileMenu();
   }
 });
 
@@ -2003,6 +2325,38 @@ document.querySelectorAll('.js-phone').forEach(function(input) {
     if (input.value.trim() && !isValidPhone(input.value)) input.classList.add('error');
   });
 });
+
+var navBurger = document.getElementById('navBurger');
+var mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu() {
+  if (!navBurger || !mobileMenu) return;
+  navBurger.setAttribute('aria-expanded', 'false');
+  navBurger.setAttribute('aria-label', 'Открыть меню');
+  mobileMenu.classList.remove('active');
+}
+
+function toggleMobileMenu() {
+  if (!navBurger || !mobileMenu) return;
+  var isOpen = navBurger.getAttribute('aria-expanded') === 'true';
+  navBurger.setAttribute('aria-expanded', String(!isOpen));
+  navBurger.setAttribute('aria-label', isOpen ? 'Открыть меню' : 'Закрыть меню');
+  mobileMenu.classList.toggle('active', !isOpen);
+}
+
+if (navBurger && mobileMenu) {
+  navBurger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleMobileMenu();
+  });
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.closest('a')) closeMobileMenu();
+  });
+  document.addEventListener('click', function(e) {
+    if (!mobileMenu.classList.contains('active')) return;
+    if (!mobileMenu.contains(e.target) && !navBurger.contains(e.target)) closeMobileMenu();
+  });
+}
 
 function showLeadError() {
   alert('Не удалось отправить заявку. Позвоните нам: +7 (995) 099-45-57');
@@ -2092,9 +2446,9 @@ function submitFinalForm() {
   });
 }
 
-function submitCasesForm() {
-  var casesPhone = document.getElementById('casesPhone');
-  var casesButton = document.querySelector('.case-catalog .form-submit');
+function submitCasesForm(phoneId) {
+  var casesPhone = document.getElementById(phoneId || 'casesPhone');
+  var casesButton = casesPhone.closest('.case-catalog').querySelector('.form-submit');
   if (!isValidPhone(casesPhone.value)) { markPhoneError(casesPhone); return; }
   setButtonLoading(casesButton, true);
   sendLead({
@@ -2114,9 +2468,10 @@ function submitCasesForm() {
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     var target = this.getAttribute('href');
-    if (target === '#offer') { e.preventDefault(); openModal(null); return; }
+    if (target === '#offer') { e.preventDefault(); closeMobileMenu(); openModal(null); return; }
     if (target === '#cases' || target === '#how' || target === '#team' || target === '#faq') {
       e.preventDefault();
+      closeMobileMenu();
       var el = document.querySelector(target);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
