@@ -2385,6 +2385,12 @@ function reachTestGoal() {
   }
 }
 
+function reachCaseGoal() {
+  if (typeof ym === 'function') {
+    ym(109741803, 'reachGoal', 'case');
+  }
+}
+
 function setButtonLoading(button, isLoading) {
   if (!button) return;
   if (isLoading) {
@@ -2465,6 +2471,7 @@ function submitCasesForm(phoneId) {
     site: '',
     source: 'Форма PDF с кейсами'
   }).then(function() {
+    reachCaseGoal();
     casesPhone.value = '';
     casesPhone.placeholder = 'Заявка принята. Подборку отправим после звонка';
     casesPhone.style.color = '#22C55E';
